@@ -1,0 +1,177 @@
+$font: 'Open Sans', sans-serif;
+$h-font: 'Roboto Slab', serif;
+$main-color: #7f888f;
+$h-color: #3d4449;
+$details-color: #f56a6a;
+$details-color2: rgba(210, 215, 217, 0.75);
+$font-size: 11pt;
+
+@mixin flex-container() {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+@mixin h($h-font-size, $h-mb) {
+  display: inline-block;
+  font-family: $h-font;
+  font-weight: bold;
+  color: $h-color;
+  font-size: $h-font-size;
+  margin-bottom: $h-mb;
+}
+@mixin h-after($mt) {
+  content: '';
+  display: block;
+  height: 3px;
+  background: $details-color;
+  width: calc(100% + 15px);
+  margin-top: $mt;
+}
+@mixin transition ($time, $f) {
+  -moz-transition: $time $f;
+  -webkit-transition: $time $f;
+  -ms-transition: $time $f;
+  transition: $time $f;
+}
+@mixin f-grow-shrink($g, $s) {
+  -moz-flex-grow: $g;
+  -webkit-flex-grow: $g;
+  -ms-flex-grow: $g;
+  flex-grow: $g;
+  -moz-flex-shrink: $s;
+  -webkit-flex-shrink: $s;
+  -ms-flex-shrink: $s;
+  flex-shrink: $s;
+}
+// блок 2
+.block2 {
+  border-bottom: 2px solid $details-color2;
+  padding-bottom: 2em;
+}
+.features {
+  @include flex-container;
+  flex-wrap: wrap;
+}
+.features-block {
+  @include f-grow-shrink(0,0);
+  width: 50%;
+  align-items: center;
+  margin-bottom: 3em;
+  @include flex-container;
+  position: relative;
+  .features-img {
+    @include f-grow-shrink(0,0);
+    width: 35%;
+    text-align: center;
+    position: relative;
+    &::before {
+      font-size: 3em;
+      color: $details-color;
+      text-align: center;
+    }
+    &.far.fa-gem::before {
+      position: relative;
+      left: -0.05em;
+    }
+    &.fab.fa-telegram-plane::before {
+      font-size: 3.5em;
+      position: relative;
+      left: -.15em;
+      top: -.05em;
+    }
+    &.fas.fa-rocket::before {
+      position: relative;
+      left: -0.1em;
+    }
+    &.fas.fa-signal::before {
+      font-size: 2.7em;
+      position: relative;
+      top: -.15em;
+      left: -.1em;
+    }
+    &::after {
+      content: '';
+      display: block;
+      height: 6.5em;
+      width: 6.5em;
+      border: 2px solid $details-color2;
+      position: absolute;
+      top: calc(50% - 3.5em);
+      left: calc(50% - 3.5em);
+      -moz-transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      border-radius: 3px;
+    }
+  }
+  .features-content {
+    @include f-grow-shrink(1,1);
+    width: 65%;
+    padding: 0 1.5em;
+  }
+  .features-h {
+    @include h(1.25em, 1em);
+  }
+}
+@media screen and  (max-width: 992px)  {
+  .features-block {
+    width: 100%;
+    margin-bottom: 4em;
+    .features-img {
+      width: 8em;
+      &::after {
+        height: 5.5em;
+        width: 5.5em;
+        top: calc(50% - 3em);
+        left: calc(50% - 3em);
+      }
+      &::before {
+        font-size: 2.5em;
+      }
+      &.fab.fa-telegram-plane::before {
+        font-size: 3em;
+      }
+      &.fas.fa-signal::before {
+         font-size: 2.2em;
+         position: relative;
+         top: -.15em;
+         left: -.1em;
+      }
+    }
+  }
+}
+@media screen and  (max-width: 480px) {
+  .features {
+    padding-top: 2em;
+  }
+  .features-block {
+    flex-wrap: wrap;
+    .features-img {
+      height: 5em;
+      width: 6em;
+      &::after {
+        height: 3.5em;
+        width: 3.5em;
+        top: -1.2em;
+        left: 1em;
+      }
+      &::before {
+        font-size: 1.5em;
+      }
+      &.fab.fa-telegram-plane::before {
+        font-size: 1.9em;
+      }
+      &.fas.fa-signal::before {
+         font-size: 1.4em;
+      }
+    }
+    .features-content {
+      width: 100%;
+      padding: 0;
+    }
+  }
+}
+
+// блок 2

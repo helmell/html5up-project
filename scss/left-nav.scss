@@ -1,0 +1,308 @@
+$font: 'Open Sans', sans-serif;
+$h-font: 'Roboto Slab', serif;
+$main-color: #7f888f;
+$h-color: #3d4449;
+$details-color: #f56a6a;
+$details-color2: rgba(210, 215, 217, 0.75);
+$font-size: 11pt;
+
+@mixin flex-container() {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+@mixin h($h-font-size, $h-mb) {
+  display: inline-block;
+  font-family: $h-font;
+  font-weight: bold;
+  color: $h-color;
+  font-size: $h-font-size;
+  margin-bottom: $h-mb;
+}
+@mixin h-after($mt) {
+  content: '';
+  display: block;
+  height: 3px;
+  background: $details-color;
+  width: calc(100% + 15px);
+  margin-top: $mt;
+}
+@mixin transition ($time, $f) {
+  -moz-transition: $time $f;
+  -webkit-transition: $time $f;
+  -ms-transition: $time $f;
+  transition: $time $f;
+}
+@mixin f-grow-shrink($g, $s) {
+  -moz-flex-grow: $g;
+  -webkit-flex-grow: $g;
+  -ms-flex-grow: $g;
+  flex-grow: $g;
+  -moz-flex-shrink: $s;
+  -webkit-flex-shrink: $s;
+  -ms-flex-shrink: $s;
+  flex-shrink: $s;
+}
+
+// меню
+.left-menu {
+  flex-grow: 0;
+	flex-shrink: 0;
+	width: 24em;
+  font-size: .9em;
+  position: fixed;
+  z-index: 10;
+  left: -24em;
+  @include transition(.5s, ease);
+  &.m-open {
+    left: 0;
+    position: relative;
+  }
+}
+.menu-item {
+  border-bottom: 2px solid $details-color2;
+  padding: 3.5em 0;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+.menu-form {
+  background: #eff1f2;
+  padding: 1.7em;
+}
+.form-search {
+  position: relative;
+}
+.nav-search {
+  width: 100%;
+  font-size: 1.1em;
+  color: $main-color;
+  padding: .7em 1.7em .7em 1em;
+  border: 1px solid $details-color2;
+  outline: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  apperance: none;
+  border-radius: 5px;
+  font-family: inherit;
+  color: #9fa3a6;
+}
+.btn-search {
+  background: transparent;
+  border: none;
+  outline: none;
+  opacity: 0.325;
+  color: inherit;
+  position: absolute;
+  right: .7em;
+  top: .6em;
+  font-size: 1.5em;
+  transform: scale(-1, 1);
+  &:hover {
+    color: $details-color;
+    opacity: 1;
+  }
+}
+.menu-main {
+  background: #f5f6f7;
+  @include f-grow-shrink(1,1);
+  padding: 0 1.7em;
+}
+.menu-h {
+  @include h(1.3888888889em, 2em);
+}
+.menu-h::after {
+  @include h-after(.5em);
+}
+.menu-list {
+  li {
+    list-style: none;
+    display: block;
+    padding: .8em 0;
+    text-transform: uppercase;
+    font-family: $h-font;
+    border-bottom: 1px solid $details-color2;
+    font-size: .9em;
+    letter-spacing: .1em;
+    a {
+      display: block;
+      text-decoration: none;
+      color: $h-color;
+      padding: .6em 0;
+    }
+    &:first-child {
+      padding-top: 0;
+    }
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    &.submenu {
+      position: relative;
+    }
+    &.submenu::after {
+      content: '\f078';
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: absolute;
+      right: 0;
+      top: 1.5em;
+      cursor: pointer;
+    }
+    &.submenu:hover::after {
+      color: $details-color;
+      @include transition(.2s, ease-in-out);
+    }
+    &.submenu.s-open::after {
+      transform: rotate(180deg);
+    }
+    &.submenu ul {
+      margin: .5em 0;
+      display: none;
+    }
+    &.submenu li {
+      border-bottom: none;
+      font-size: .8em;
+      padding: 0 1em;
+      a {
+        color: $main-color;
+      }
+    }
+  }
+}
+.menu-img-block {
+  border-bottom: 1px solid $details-color2;
+  padding-bottom: 2em;
+  margin-bottom: 2em;
+  a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    margin: 0 0 1.5em;
+    img {
+      display: block;
+      width: 100%;
+      border-radius: 5px;
+      @include transition(.2s, ease);
+    }
+    &:hover img {
+      transform: scale(1.07);
+    }
+  }
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+}
+.menu-contacts {
+  margin-top: .5em;
+  p {
+    font-family: $font;
+    font-size: 1em;
+    display: block;
+    font-weight: 400;
+    -moz-osx-font-smoothing: auto;
+    -webkit-font-smoothing: auto;
+    line-height: inherit;
+    padding: 1.5em 0 1.5em 2.5em;
+    border-bottom: 1px solid $details-color2;
+    position: relative;
+    a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted;
+    }
+    &::before {
+      font-family: "Font Awesome 5 Free";
+      color: $details-color;
+      position: absolute;
+      left: 0;
+    }
+    &.fa::before, &.fas::before {
+      font-weight: 900;
+    }
+    &.fa-envelope::before {
+      font-size: 1.4em;
+      top: .9em;
+    }
+    &.fa-phone::before {
+      font-size: 1.2em;
+      transform: scale(-1,1);
+    }
+    &.fa-home::before {
+      font-size: 1.2em;
+    }
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+}
+.menu-footer {
+  font-size: .9em;
+  color: #9fa3a6;
+  a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted;
+  }
+}
+.btn-nav {
+  font-size: 1.8em;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: $details-color;
+  position: absolute;
+  left: .7em;
+  top: 1em;
+  @include transition(.5s, ease);
+  z-index: 10;
+  &.b-nav-open {
+    left: 12.5em !important;
+  }
+}
+@media screen and  (max-width: 1280px) {
+  .left-menu {
+    position: fixed;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    top: 0;
+    left: -24em;
+  }
+  .left-menu.m-open {
+    left: 0;
+    position: fixed;
+    box-shadow: 0 0 5em 0 rgba(0, 0, 0, 0.175);
+}
+.btn-nav {
+  position: fixed;
+}
+}
+@media screen and  (min-width: 1280px) {
+  .m-open .menu-fix {
+    position: fixed !important;
+    bottom: 0;
+    top: auto;
+    width: 24em;
+    left: 0;
+  }
+}
+@media screen and  (max-width: 736px) {
+  .btn-nav{
+    background: rgba(222, 225, 226, 0.75);
+    border-radius: 5px;
+    height: 2.6em;
+    width: 3.8em;
+    color: $main-color;
+    font-size: 1.2em;
+  }
+  .btn-nav.b-nav-open {
+    left: 18.5em !important;
+}
+}
+// меню

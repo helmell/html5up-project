@@ -1,0 +1,114 @@
+$font: 'Open Sans', sans-serif;
+$h-font: 'Roboto Slab', serif;
+$main-color: #7f888f;
+$h-color: #3d4449;
+$details-color: #f56a6a;
+$details-color2: rgba(210, 215, 217, 0.75);
+$font-size: 11pt;
+
+@mixin flex-container() {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+@mixin h($h-font-size, $h-mb) {
+  display: inline-block;
+  font-family: $h-font;
+  font-weight: bold;
+  color: $h-color;
+  font-size: $h-font-size;
+  margin-bottom: $h-mb;
+}
+@mixin h-after($mt) {
+  content: '';
+  display: block;
+  height: 3px;
+  background: $details-color;
+  width: calc(100% + 15px);
+  margin-top: $mt;
+}
+@mixin transition ($time, $f) {
+  -moz-transition: $time $f;
+  -webkit-transition: $time $f;
+  -ms-transition: $time $f;
+  transition: $time $f;
+}
+@mixin f-grow-shrink($g, $s) {
+  -moz-flex-grow: $g;
+  -webkit-flex-grow: $g;
+  -ms-flex-grow: $g;
+  flex-grow: $g;
+  -moz-flex-shrink: $s;
+  -webkit-flex-shrink: $s;
+  -ms-flex-shrink: $s;
+  flex-shrink: $s;
+}
+// блок 1
+.block1 {
+  @include flex-container;
+  border-bottom: 2px solid $details-color2;
+  padding-bottom: 5em;
+}
+.block1-content {
+  @include f-grow-shrink(1,1);
+  width: 50%;
+  .btn {
+    margin-top: 2.5em;
+  }
+}
+.block1-img {
+  @include f-grow-shrink(0,0);
+  width: 50%;
+  margin-left: 4em;
+  img {
+    width: 100%;
+    height: 100%;
+    -moz-object-fit: cover;
+    -webkit-object-fit: cover;
+    -ms-object-fit: cover;
+    object-fit: cover;
+    -moz-object-position: center;
+    -webkit-object-position: center;
+    -ms-object-position: center;
+    object-position: center;
+    border-radius: 5px;
+  }
+}
+h1 {
+  font-family: $h-font;
+  font-weight: 700;
+  color: $h-color;
+  font-size: 3.5em;
+  line-height: 1.3;
+  margin: -0.125em 0 .5em;
+}
+h2 {
+  font-family: $h-font;
+  text-transform: uppercase;
+  font-size: 1em;
+  margin-top: -0.5em;
+  font-weight: 400;
+  letter-spacing: 0.09em;
+  margin-bottom: 2em;
+}
+@media screen and  (max-width: 736px) {
+  .block1 {
+    flex-direction: row-reverse;
+    flex-wrap: wrap-reverse;
+  }
+  .block1-content {
+    width: 100%;
+    padding-top: 3em;
+  }
+  .block1-img {
+    width: 100%;
+  }
+  h1 {
+    font-size: 2em;
+    br {
+      display: none;
+    }
+  }
+}
+// блок 1
